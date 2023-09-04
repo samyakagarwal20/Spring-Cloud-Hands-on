@@ -2,3 +2,6 @@ spring:
   cloud:
     config:
       enabled: false
+limits-service:
+  minimum: 2
+  maximum: 998
