@@ -1,10 +1,10 @@
-package com.yflash.tech.limitsservice;
+package com.yflash.tech.springcloudconfigserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LimitsServiceApplicationTests {
+class SpringCloudConfigServerApplicationTests {
 
 	@Test
 	void contextLoads() {
