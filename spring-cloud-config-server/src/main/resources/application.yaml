@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: spring-cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/samyakagarwal20/Centralized-Config.git        # centralized config git repo path
+          default-label: master                                                 # corresponds to default branch name
+server:
+  port: 8888
