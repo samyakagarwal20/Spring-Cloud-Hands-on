@@ -1,7 +1,5 @@
 spring:
-  cloud:
-    config:
-      enabled: false
-limits-service:
-  minimum: 2
-  maximum: 998
+  application:
+    name: limits-service
+  config:
+    import: optional:configserver:http://localhost:8888
