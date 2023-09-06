@@ -1,6 +1,6 @@
 package com.yflash.tech.currencyexchangeservice.controller;
 
-import com.yflash.tech.currencyexchangeservice.model.CurrencyExchange;
+import com.yflash.tech.currencyexchangeservice.entity.CurrencyExchange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
