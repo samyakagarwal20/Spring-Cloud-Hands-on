@@ -3,5 +3,11 @@ spring:
     name: api-gateway
   config:
     import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true                   # allows gateway to check for the services registered on Eureka server
+          lower-case-service-id: true     # allows to make use of lowerCase service IDs while routing the API request via gateway to a particular service
 server:
   port: 8765
