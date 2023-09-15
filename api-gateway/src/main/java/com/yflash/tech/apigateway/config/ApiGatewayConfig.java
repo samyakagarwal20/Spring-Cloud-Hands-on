@@ -19,7 +19,14 @@ public class ApiGatewayConfig {
                 .route(predicateSpec -> predicateSpec.path("/currency-exchange/**")
                         .uri("lb://currency-exchange"))                                         // talks to the eureka server to fetch the registered instances and load balances the request between them
                 .route(predicateSpec -> predicateSpec.path("/currency-conversion-feign/**")
-                        .uri("lb://currency-conversion-service"))                             // redirecting internally to some existing URI
+                        .uri("lb://currency-conversion-service"))
+                .route(predicateSpec -> predicateSpec.path("/currency-conversion-custom/**")
+                        .filters(gatewayFilterSpec -> gatewayFilterSpec.rewritePath(
+                                "/currency-conversion-custom/(?<segment>.*)",
+                                "/currency-conversion-feign/${segment}"
+                        ))                                                                      // anything which comes after currency-conversion-custom is stored in segment variable
+                                                                                                // and the same is attached after currency-conversion-feign/ via Spring Expression Language (SpEL)
+                        .uri("lb://currency-conversion-service"))                               // redirecting internally to some existing URI
                 .build();
     }
 
