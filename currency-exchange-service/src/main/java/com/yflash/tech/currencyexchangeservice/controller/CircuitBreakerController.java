@@ -1,6 +1,7 @@
 package com.yflash.tech.currencyexchangeservice.controller;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -30,16 +31,23 @@ public class CircuitBreakerController {
 //        return responseEntity.getBody();
 //    }
 
+//    @GetMapping("sample-api")
+//    @CircuitBreaker(name = "sample-api", fallbackMethod = "retryFailureResponse")
+//    public String sampleApi(HttpServletRequest request) {
+//        LOGGER.info("Intercepted request --> {}", request.getRequestURI());
+//        ResponseEntity<String> responseEntity = new RestTemplate().exchange(
+//                "http:localhost:8080/dummy-api",
+//                HttpMethod.GET,
+//                null,
+//                String.class);
+//        return responseEntity.getBody();
+//    }
+
     @GetMapping("sample-api")
-    @CircuitBreaker(name = "sample-api", fallbackMethod = "retryFailureResponse")
+    @RateLimiter(name = "sample-api-rate-limiter", fallbackMethod = "retryFailureResponse")
     public String sampleApi(HttpServletRequest request) {
         LOGGER.info("Intercepted request --> {}", request.getRequestURI());
-        ResponseEntity<String> responseEntity = new RestTemplate().exchange(
-                "http:localhost:8080/dummy-api",
-                HttpMethod.GET,
-                null,
-                String.class);
-        return responseEntity.getBody();
+        return "sample-api";
     }
 
     public String retryFailureResponse(Exception e) {

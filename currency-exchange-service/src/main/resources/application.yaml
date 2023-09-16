@@ -27,3 +27,8 @@ resilience4j:
         enableExponentialBackoff: true
         retryExceptions:
           - java.io.IOException
+  ratelimiter:
+    instances:
+      sample-api-rate-limiter:
+        limitForPeriod: 5
+        limitRefreshPeriod: 10s
