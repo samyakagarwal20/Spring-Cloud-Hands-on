@@ -14,3 +14,12 @@ spring:
       enabled: true
 server:
   port: 8000
+resilience4j:
+  retry:
+    instances:
+      sample-api:
+        maxAttempts: 5
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        retryExceptions:
+          - java.io.IOException
