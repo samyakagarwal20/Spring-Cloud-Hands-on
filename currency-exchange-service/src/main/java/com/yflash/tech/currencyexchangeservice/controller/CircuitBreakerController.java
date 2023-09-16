@@ -12,7 +12,6 @@ public class CircuitBreakerController {
     private static final Logger LOGGER = LogManager.getLogger(CircuitBreakerController.class);
 
     @GetMapping("sample-api")
-
     public String sampleApi(HttpServletRequest request) {
         LOGGER.info("Intercepted request --> {}", request.getRequestURI());
         return "Sample API";
