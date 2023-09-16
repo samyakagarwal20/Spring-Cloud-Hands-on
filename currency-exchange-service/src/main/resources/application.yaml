@@ -32,3 +32,7 @@ resilience4j:
       sample-api-rate-limiter:
         limitForPeriod: 5
         limitRefreshPeriod: 10s
+  bulkhead:
+    instances:
+      sample-api-bulkhead:
+        maxConcurrentCalls: 2

@@ -1,5 +1,6 @@
 package com.yflash.tech.currencyexchangeservice.controller;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -43,8 +44,15 @@ public class CircuitBreakerController {
 //        return responseEntity.getBody();
 //    }
 
+//    @GetMapping("sample-api")
+//    @RateLimiter(name = "sample-api-rate-limiter", fallbackMethod = "retryFailureResponse")
+//    public String sampleApi(HttpServletRequest request) {
+//        LOGGER.info("Intercepted request --> {}", request.getRequestURI());
+//        return "sample-api";
+//    }
+
     @GetMapping("sample-api")
-    @RateLimiter(name = "sample-api-rate-limiter", fallbackMethod = "retryFailureResponse")
+    @Bulkhead(name = "sample-api-bulkhead", fallbackMethod = "retryFailureResponse")
     public String sampleApi(HttpServletRequest request) {
         LOGGER.info("Intercepted request --> {}", request.getRequestURI());
         return "sample-api";
