@@ -15,6 +15,10 @@ spring:
 server:
   port: 8000
 resilience4j:
+  circuitbreaker:
+    instances:
+      sample-api:
+        waitDurationInOpenState: 5s
   retry:
     instances:
       sample-api:
@@ -23,3 +27,12 @@ resilience4j:
         enableExponentialBackoff: true
         retryExceptions:
           - java.io.IOException
+  ratelimiter:
+    instances:
+      sample-api-rate-limiter:
+        limitForPeriod: 5
+        limitRefreshPeriod: 10s
+  bulkhead:
+    instances:
+      sample-api-bulkhead:
+        maxConcurrentCalls: 2
